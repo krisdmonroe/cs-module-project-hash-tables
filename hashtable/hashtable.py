@@ -188,8 +188,8 @@ class HashTable:
 
         # Allocate a new array of bigger size, typically double the previous size
         #  (or half the size if resizing down, down to some minimum)
-        if self.count / self.get_num_slots() < self.overload:
-                self.resize(self.capacity * 2)
+        # if self.count / self.get_num_slots() < self.overload:
+        #     self.resize(self.capacity * 2)
 
         # self.bucket[self.hash_index(key)] for reference
         # since we have to do searching for the key implement something similiar to delete in singly linked list except change value
@@ -200,7 +200,7 @@ class HashTable:
 
         # If the position is None make a hashtable entry at that location
         if cur is None:
-            cur = HashTableEntry(key, value)
+            self.bucket[slot] = HashTableEntry(key, value)
         # if that index already has a hashtable entry there
         else:
             while cur is not None:
@@ -245,9 +245,9 @@ class HashTable:
 
         # Allocate a new array of bigger size, typically double the previous size
         #  (or half the size if resizing down, down to some minimum)
-        if self.count / self.get_num_slots() < self.underload:
-            if self.get_num_slots() // 2 >= 8:
-                self.resize(self.capacity // 2)
+        # if self.count / self.get_num_slots() < self.underload:
+        #     if self.get_num_slots() // 2 >= 8:
+        #         self.resize(self.capacity // 2)
                 
         # self.bucket[self.hash_index(key)] for reference
 
@@ -273,10 +273,10 @@ class HashTable:
                 previous = cur
                 cur = cur.next
             print('Warning Entry Not Found')
-        if self.count == 0:
-            return
-        else:
-            self.count -= 1
+        # if self.count == 0:
+        #     return
+        # else:
+        #     self.count -= 1
             
 
     def get(self, key):
