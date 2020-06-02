@@ -188,9 +188,7 @@ class HashTable:
 
         # Allocate a new array of bigger size, typically double the previous size
         #  (or half the size if resizing down, down to some minimum)
-        # if self.count / self.get_num_slots() < self.overload:
-        #     self.resize(self.capacity * 2)
-        if self.count / self.capacity > self.overload:
+        if self.count / self.get_num_slots() > self.overload:
             self.resize(self.capacity * 2)
         # self.bucket[self.hash_index(key)] for reference
         # since we have to do searching for the key implement something similiar to delete in singly linked list except change value
@@ -246,10 +244,7 @@ class HashTable:
 
         # Allocate a new array of bigger size, typically double the previous size
         #  (or half the size if resizing down, down to some minimum)
-        # if self.count / self.get_num_slots() < self.underload:
-        #     if self.get_num_slots() // 2 >= 8:
-        #         self.resize(self.capacity // 2)
-        if self.count / self.capacity < self.underload:
+        if self.count / self.get_num_slots() < self.underload:
             if self.get_num_slots() // 2 >= 8:
                 self.resize(self.capacity // 2)
         # self.bucket[self.hash_index(key)] for reference
