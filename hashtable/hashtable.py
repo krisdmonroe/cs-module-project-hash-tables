@@ -190,7 +190,8 @@ class HashTable:
         #  (or half the size if resizing down, down to some minimum)
         # if self.count / self.get_num_slots() < self.overload:
         #     self.resize(self.capacity * 2)
-
+        if self.count / self.capacity > self.overload:
+            self.resize(self.capacity * 2)
         # self.bucket[self.hash_index(key)] for reference
         # since we have to do searching for the key implement something similiar to delete in singly linked list except change value
         slot = self.hash_index(key)
@@ -248,7 +249,9 @@ class HashTable:
         # if self.count / self.get_num_slots() < self.underload:
         #     if self.get_num_slots() // 2 >= 8:
         #         self.resize(self.capacity // 2)
-                
+        if self.count / self.capacity < self.underload:
+            if self.get_num_slots() // 2 >= 8:
+                self.resize(self.capacity // 2)
         # self.bucket[self.hash_index(key)] for reference
 
         # since we have to do searching for the key implement something similiar to delete in singly linked
@@ -332,8 +335,9 @@ class HashTable:
         for item in old:
             # need to loop and use the next pointer to continue throught the list
             while item is not None:
-                # can use our methods since we replaced self.bucket with out new items
+                # can use our methods since we replaced self.bucket with our new items
                 self.put(item.key, item.value)
+                # keep loop going
                 item = item.next
 
 if __name__ == "__main__":
