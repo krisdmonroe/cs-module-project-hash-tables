@@ -112,8 +112,8 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        # return len(self.bucket)
-        return self.capacity
+        return len(self.bucket)
+        # return self.capacity
 
     def get_load_factor(self):
         """
@@ -209,7 +209,6 @@ class HashTable:
                     cur.value = value
                     return
                 # *****keeps the loop going steping throught the values****    
-                previous = cur
                 cur = cur.next
         self.count += 1 
 
@@ -263,13 +262,12 @@ class HashTable:
                    cur.value = None
                    return
                 # **keeps the loop going steping throught the values****    
-                previous = cur
                 cur = cur.next
             print('Warning Entry Not Found')
-        # if self.count == 0:
-        #     return
-        # else:
-        #     self.count -= 1
+        if self.count == 0:
+            return
+        else:
+            self.count -= 1
             
 
     def get(self, key):
