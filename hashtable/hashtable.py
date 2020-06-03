@@ -211,11 +211,6 @@ class HashTable:
                 # *****keeps the loop going steping throught the values****    
                 previous = cur
                 cur = cur.next
-            
-            # if there is no key to match and the location is not empty
-            cur = HashTableEntry(key, value)
-            # set the previous.next pointer to point to current value
-            previous.next = cur
         self.count += 1 
 
     def delete(self, key):
