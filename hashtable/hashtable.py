@@ -93,11 +93,11 @@ class HashTable:
         # self.bucket = [LinkedList()] * self.capacity <- changed my mind on this
         if capacity >= MIN_CAPACITY:
             self.capacity = capacity
-            self.bucket = [None] * self.capacity
+            self.bucket = [None] * capacity
         else:
             self.capacity = capacity
             self.capacity = MIN_CAPACITY
-            self.bucket = [None] * self.capacity
+            self.bucket = [None] * capacity
         self.overload = 0.7
         self.underload = 0.2
         self.count = 0
@@ -202,14 +202,18 @@ class HashTable:
             self.bucket[slot] = HashTableEntry(key, value)
         # if that index already has a hashtable entry there
         else:
-            while cur is not None:
-                # check to see if those keys match
-                if cur.key == key:
-                    # if they do match change that value
-                    cur.value = value
-                    return
-                # *****keeps the loop going steping throught the values****    
-                cur = cur.next
+            # make the next entry the head 
+            HashTableEntry(key, value).next = self.bucket[slot]
+            self.bucket[slot] = HashTableEntry(key, value)
+# another way of doing it-----------------------------------------------
+            # while cur is not None:
+            #     # check to see if those keys match
+            #     if cur.key == key:
+            #         # if they do match change that value
+            #         cur.value = value
+            #         return
+            #     # *****keeps the loop going steping throught the values****    
+            #     cur = cur.next
         self.count += 1 
 
     def delete(self, key):
